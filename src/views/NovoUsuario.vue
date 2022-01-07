@@ -51,20 +51,18 @@ export default {
    methods: {
     enviarFormulario () {
         //axios realiza post na url indicada do backend
-        this.$http.post("auth/register", 
-        this.usuario)
+        this.$http
+        .post("auth/register", this.usuario)
         //axios retorna promise - then chama callback com resp do servidor
-        .then(resposta => {
-            console.log(resposta)
+        .then(resposta => console.log(resposta))
         //em cao de sucesso, view acessa $router para alocar novo usuário ao login
             this.$router.push({
                 name: 'login'})
         //captura de falha
         .catch(erro => console.log(erro))
-        })
-        }
+      }
    }
-}
+};
 
 
 </script>

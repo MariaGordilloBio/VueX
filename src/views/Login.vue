@@ -40,18 +40,26 @@ export default{
     //código anterior omitido
 
     methods: {
-        efetuarLogin () {
-            this.$http.post('auth/login', this.usuario)
-                 .then(response => {
-                     console.log(response)
+        efetuarLogin() {
+            this.$store
+                .dispatch("efetuarLogin", this.usuario)
+                .then(() => this.$router.push({ name: 'gerentes'}));
+            }
+    }
+                 //.then(response => {
+                     //console.log(response)
     //redireciona usuário para rota gerentes
     //armazena token no localstorage para não perder ao reccaregar
-                     localStorage.setItem('token', response.data.access_token)
-                     this.$router.push({ name: 'gerentes' })
-                 })
-                 .catch(erro => console.log(erro))
-        }
-    }
-}
-
+                     //localStorage.setItem('token', response.data.access_token) - VueX não usa LocalStorage
+                     //this.$store.state.token = response.data.access_token
+                     //this.$store.sate.usuario = response.data.user
+                     //salvando token e usuario
+                     //this.$router.push({ name: 'gerentes' })
+                     //this.$store.commit('DEFINIR_USUARIO_LOGADO',{
+                         //token: response.data.access_token,
+                         //usuario: response.data.user })
+                     //this.$router.push({name : 'gerentes'})
+                     
+};
+            
 </script>
