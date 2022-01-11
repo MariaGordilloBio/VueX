@@ -16,8 +16,12 @@
          class="form-control" 
          v-model="usuario.email">
       </div>
+      <p 
+      class="alert alert-danger" 
+      v-if="mensagemErro">{{ mensagemErro }}
+      </p>
         <button 
-        class="botao-envio" type="submit">Entrar</button>
+        class="btn btn-primary brn-block" type="submit">Entrar</button>
       <router-link :to="{ name: 'novo.usuario' }">
         Não possui um cadastro? Cadastre-se aqui!
       </router-link>
@@ -32,10 +36,9 @@
 export default{
     data(){
         return {
-            usuario : {
-
-            }
-        }
+            usuario : {},
+            mensagemErro: " "
+        };
     },
     //código anterior omitido
 
@@ -43,8 +46,15 @@ export default{
         efetuarLogin() {
             this.$store
                 .dispatch("efetuarLogin", this.usuario)
-                .then(() => this.$router.push({ name: 'gerentes'}));
-            }
+                .then(() => 
+                    this.$router.push({ name: 'gerentes' }))
+    //em caso de erro, mostrar mensagem ao usuário:
+                .catch(erro => {
+                  if (erro.request.status == 401) {
+                    this.mensagemErro = "Login ou senha inválido(s)";
+          }
+        });
+      }
     }
                  //.then(response => {
                      //console.log(response)

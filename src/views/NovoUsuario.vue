@@ -27,7 +27,7 @@ two-way binding com v-model conecta inputs com propriedades do objeto-->
          v-model="usuario.email">
       </div>
         <button 
-        class="botao-envio" type="submit">Salvar</button>
+        class="btn btn-primary" type="submit">Salvar</button>
      </form>
   </div>
 </template>
@@ -46,7 +46,7 @@ export default {
         senha: "",
         email: "",
         }
-    }
+    };
   },
    methods: {
     enviarFormulario () {
@@ -55,9 +55,6 @@ export default {
         .post("auth/register", this.usuario)
         //axios retorna promise - then chama callback com resp do servidor
         .then(resposta => console.log(resposta))
-        //em cao de sucesso, view acessa $router para alocar novo usuário ao login
-            this.$router.push({
-                name: 'login'})
         //captura de falha
         .catch(erro => console.log(erro))
       }

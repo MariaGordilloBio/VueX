@@ -10,12 +10,15 @@ Vue.use(Vuex)
 
 const estado = {
 //definimos o estado inicial da aplicação
+/*single state tree - 
+that is, this single object contains all your application level state and serves as the "single source of truth." */
     token: null,
     usuario: {}
 }
 //mutações em VueX são escritas em caixa alta e as ações não
 const mutations = {
 //alterar estado
+/*Vuex mutations are very similar to events: each mutation has a string type and a handler.*/
     DEFINIR_USUARIO_LOGADO(state, {
 // vue disponibiliza estado, token e usuario sãodados enviados dentro da mutação        
         token, usuario }) {
@@ -30,13 +33,14 @@ const mutations = {
 const actions = {
 //Actions, que são as possíveis maneiras que permitem que o usuário altere um estado
 //é a forma como a aplicação reage às ações do usuário
+/*actions commit mutations - asynchronous operations */
             efetuarLogin ({ commit }, usuario) {
                 return new Promise( (resolve, reject) => {
                     http.post('auth/login', usuario)
-                    .then(response => {
-                        commit('DEFINIR_USUARIO_LOGADO', {
-                            token: response.data.access_token,
-                            usuario: response.data.user
+                        .then(response => {
+                            commit('DEFINIR_USUARIO_LOGADO', {
+                                token: response.data.access_token,
+                                usuario: response.data.user
                         })
                         resolve(response.data)
                     })
@@ -49,9 +53,9 @@ const actions = {
         }
     
 
-
 export default new Vuex.Store({
     state: estado,
     mutations,
-    actions
+    actions,
+
 })

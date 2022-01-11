@@ -27,16 +27,14 @@ export default {
 //queremos que o Vue.js acesse o .$http com this para pegar com get() o 'gerentes'.    
       //.then(response => (this.gerentes = response.data))
       //.catch(erro => console.log(erro));
-      if (!this.$store.state.token) {
-        console.log('não pode acessar deslogado!!')
-        this.$router.push({ name: 'login'})
-    }
-    this.$http.get('gerentes')
-        .then(response => this.gerentes = response.data)
-        .catch(erro => console.log(erro))
-  }
+      this.$http
+      .get("gerentes")
+      .then(response => (this.gerentes = response.data))
+      .catch(erro => console.log(erro));
 
-}
+  }
+};
+
 </script>
 
 <style>

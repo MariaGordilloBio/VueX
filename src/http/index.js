@@ -2,21 +2,21 @@
 //sem precisar importare analisar a cada componente
 
 import axios from 'axios'
-import provedor from '@/provedor'
+import store from '@/store'
 
 const http = axios.create({
 //obj http faz requisições para back-end
 //criar uma nova instância nos permite definir algumas propriedades comuns para todas as requisições
-baseURL: 'http://localhost:8000/',
+    baseURL: 'http://localhost:8000/',
 //baseURL - todas as nossas requisições começam do mesmo jeito: 'http://localhost:8000'
-headers: {
-    'Accept': 'application/json',
-    'Content': 'application/json'
+    headers: {
+        'Accept': 'application/json',
+        'Content': 'application/json'
     }
 })
 
 http.interceptors.request.use(function (config) {
-    const token = provedor.state.token
+    const token = store.state.token
     if (token) {
         config.headers.Authorization = `Bearer ${token}`
     }
