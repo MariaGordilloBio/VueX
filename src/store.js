@@ -1,4 +1,4 @@
-//provedor - aquele que será responsável pela monitoração doestado do usuário
+//store - aquele que será responsável pela monitoração do estado do usuário
 //impedir que alteração fora de escopo aconteça
 //VueX é padrão para controle de estado
 import Vuex from 'vuex'
